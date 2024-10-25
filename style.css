@@ -1,0 +1,276 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #f3f3f3;
+    transition: background 0.3s, color 0.3s;
+}
+
+.container {
+    text-align: center;
+    background-color: #2e2a3b;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: #61dafb;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    width: 100%; /* Ensures the board is responsive */
+}
+
+.cell {
+    width: 100%; /* Full width to be responsive */
+    aspect-ratio: 1; /* Maintain a square aspect ratio */
+    background: linear-gradient(145deg, #3b3a57, #333042);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: #61dafb;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background: linear-gradient(145deg, #5c5a83, #44415c);
+}
+
+.cell:active {
+    transform: scale(0.95); /* Subtle scale effect on click */
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #61dafb;
+    color: #2e2a3b;
+    border: none;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Added background color transition */
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: #57c7eb; /* Slightly darker shade on hover */
+}
+
+#message {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    color: #61dafb;
+}
+
+/* Previous CSS code here */
+
+/* Confetti */
+@keyframes confetti {
+    0% { opacity: 1; transform: translateY(0) rotate(0); }
+    100% { opacity: 0; transform: translateY(200px) rotate(360deg); }
+}
+
+/* Popup Modal */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.popup-content {
+    background-color: #2e2a3b;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: #61dafb;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #61dafb;
+    color: #2e2a3b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.popup-content button:hover {
+    transform: scale(1.1);
+}
+
+/* Shake animation for draw */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+/* Previous CSS code here */
+
+/* Scoreboard */
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.scoreboard p {
+    font-size: 1.2rem;
+    color: #61dafb;
+}
+
+#turnIndicator {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #f3f3f3;
+}
+
+
+/* Cell click animation */
+.cell.clicked {
+    animation: pop 0.2s ease-in-out;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+:root {
+    /* Dark theme colors */
+    --background: #2e2a3b;
+    --text-color: #f3f3f3;
+    --button-background: #61dafb;
+    --cell-background: #3b3a57;
+    --cell-hover: #5c5a83;
+}
+
+body.light-theme {
+    /* Light theme colors */
+    --background: #f3f3f3;
+    --text-color: #fbfbfd;
+    --button-background: #2e2a3b;
+    --cell-background: #3b3a57;
+    --cell-hover: #b0b8cc;
+}
+
+body {
+    background: var(--background);
+    color: var(--text-color); /* Use variable for text color */
+    font-family: Arial, sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+
+button, #turnIndicator, .scoreboard p, #message, h1 {
+    color: var(--text-color); /* Use variable for all text elements */
+}
+
+/* Cell styling */
+.cell {
+    background-color: var(--cell-background);
+}
+
+.cell:hover {
+    background-color: var(--cell-hover);
+}
+
+/* Existing styles remain */
+
+.history-container {
+    margin-top: 20px;
+    background-color: var(--cell-background);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+    color: var(--text-color);
+}
+
+.history-container h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.history-container ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.history-container li {
+    margin: 5px 0;
+}
+
+/* Winning animation */
+.cell.winning-cell {
+    background-color: #4caf50 !important;
+    color: #fff;
+    animation: winning-bounce 0.5s alternate infinite;
+}
+
+@keyframes winning-bounce {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Scoreboard */
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.scoreboard p {
+    font-size: 1.2rem;
+    color: #61dafb;
+}
+
+#turnIndicator {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #f3f3f3;
+}
+
